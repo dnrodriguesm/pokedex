@@ -18,6 +18,7 @@
       "dom"
     ],
     "paths": {
+      "@pages/*": ["src/app/pages/*"],
       "@env/*": ["src/environments/*"],
       "@models/*": ["src/app/models/*"],
       "@services/*": ["src/app/services/*"]
