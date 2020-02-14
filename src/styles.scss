@@ -1,4 +1,40 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~src/assets/scss/mixins/mixins";
+@import '~src/assets/scss/placeholders/placeholders';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Roboto', sans-serif; }
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: { top: 0; bottom: 8px };
+}
+
+.container {
+  @extend %container;
+  @extend %padding--x;
+}
+
+@media(min-width: 768px) {
+  .container {
+    width: 960px;
+    max-width: 100%;
+  }
+}
+
+
+/**
+ * Material overrides
+ */
+.mat-form-field--block {
+  width: 100%;
+}

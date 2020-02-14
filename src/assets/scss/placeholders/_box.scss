@@ -1,0 +1,21 @@
+%container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+%radius {
+  border-radius: 8px;
+}
+
+%padding--x {
+  padding: { left: 24px; right: 24px; };
+}
+
+%padding--y {
+  padding: { top: 24px; bottom: 24px; };
+}
+
+%padding {
+  @extend %padding--x;
+  @extend %padding--y;
+}

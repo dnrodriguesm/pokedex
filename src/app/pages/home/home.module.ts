@@ -5,11 +5,24 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home.routing.module';
 
+import { HeaderComponent } from '@components/header/header.component';
+import { FooterComponent } from '@components/footer/footer.component';
+import { PokedexComponent } from '@components/pokedex/pokedex.component';
+
+import { MatSelectModule } from '@angular/material';
+
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [
+    HeaderComponent,
+    FooterComponent,
+    PokedexComponent,
+    HomeComponent
+  ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    MatSelectModule,
+
   ],
   exports: [RouterModule]
 })

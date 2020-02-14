@@ -1,0 +1,9 @@
+@import '~src/assets/scss/placeholders/placeholders';
+
+.pokedex {
+  background: #ffffff;
+  @extend %container;
+  @extend %padding;
+  @extend %radius;
+  margin-bottom: 16px;
+}

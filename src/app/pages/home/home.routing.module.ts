@@ -7,15 +7,12 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-    children: [{
-      path: '',
-      redirectTo: '/pokedex',
-      pathMatch: 'full'
-    },
-    {
-      path: 'pokedex',
-      loadChildren: '@pages/pokedex/pokedex.module#PokedexModule'
-    }]
+    redirectTo: '/pokedex',
+    pathMatch: 'full'
+  },
+  {
+    path: 'pokedex',
+    component: HomeComponent,
   },
   {
     path: '**',

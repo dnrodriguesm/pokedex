@@ -1,0 +1,11 @@
+@import "~src/assets/scss/mixins/mixins";
+
+:host {
+  @include flexbox();
+
+  height: 100%;
+  padding: { top: 32px; bottom: 32px; };
+
+  background: #ffffff;
+  background: radial-gradient(circle, #ffffff 0%, #1ACBEB 100%);
+}

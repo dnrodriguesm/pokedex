@@ -1,0 +1,31 @@
+<header class="header">
+  <div class="header__info">
+    <img class="header__logo" src="./assets/images/pokeball.svg" alt="Pokémon">
+  </div>
+
+  <div class="header__form">
+    <h1 class="header__title">Pokémon Database (Pokedex)</h1>
+  
+    <mat-form-field class="mat-form-field--block">
+      <mat-select placeholder="Select a Pokémon">
+        <mat-optgroup label="Grupo">
+          <mat-option [value]="0">
+            Pikachu
+          </mat-option>
+          <mat-option [value]="1">
+            Charizard
+          </mat-option>
+        </mat-optgroup>
+
+        <mat-optgroup label="Grupo 2">
+          <mat-option [value]="0">
+            Pikachu
+          </mat-option>
+          <mat-option [value]="1">
+            Charizard
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</header>
