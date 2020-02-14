@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home.routing.module';
@@ -11,11 +12,14 @@ import { PokedexComponent } from '@components/pokedex/pokedex.component';
 
 import {
   MatSelectModule,
+  MatFormFieldModule,
   MatExpansionModule,
   MatIconModule,
   MatListModule,
   MatProgressBarModule,
   MatButtonModule } from '@angular/material';
+
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 @NgModule({
   declarations: [
@@ -26,13 +30,16 @@ import {
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     HomeRoutingModule,
     MatSelectModule,
+    MatFormFieldModule,
     MatExpansionModule,
     MatIconModule,
     MatListModule,
     MatProgressBarModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxMatSelectSearchModule
   ],
   exports: [RouterModule]
 })
