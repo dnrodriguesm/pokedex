@@ -17,8 +17,15 @@ $header-form--background: #ffffff;
   &__form {
     background-color: $header-form--background;
     padding: 24px 24px 8px;
-    margin-right: 24px;
     @extend %radius;
+  }
+
+  &__controls {
+    @include flexbox();
+
+    > button {
+      margin-left: 24px;
+    }
   }
 
   &__logo {
@@ -37,7 +44,7 @@ $header-form--background: #ffffff;
   .header {
     @include flex-direction(row-reverse);
 
-    &__form { @include flex(1); }
+    &__form { @include flex(1); margin-right: 24px; }
     &__info { @include flex-basis($header-info--size); }
     &__logo { max-width: 100%; margin-bottom: 0; }
     &__title { @include font-size(32px); }

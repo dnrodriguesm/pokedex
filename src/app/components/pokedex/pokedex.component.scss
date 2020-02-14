@@ -1,9 +1,47 @@
+@import '~src/assets/scss/mixins/mixins';
 @import '~src/assets/scss/placeholders/placeholders';
 
 .pokedex {
+  @include flexbox();
+  @include flex-direction(column);
+
   background: #ffffff;
   @extend %container;
   @extend %padding;
   @extend %radius;
   margin-bottom: 16px;
+
+  &__status {
+    @include flexbox();
+    @include flex-basis(96px);
+    min-width: 100%;
+    margin-bottom: 16px;
+
+    span { @include font-size(14px); }
+    > div { margin-left: 16px; }
+  }
+
+  &__detail {
+    @include flex(1);
+  }
+
+  &__thumb {
+    border: solid 1px #eaeaea;
+  }
+}
+
+@media(min-width: 768px) {
+  .pokedex {
+    @include flex-direction(row);
+
+    &__status {
+      display: block;
+      min-width: initial;
+      margin-bottom: 0;
+
+      > div { margin-left: 0; }
+    }
+
+    &__detail { margin-left: 32px; }
+  }
 }

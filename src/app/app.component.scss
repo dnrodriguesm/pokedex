@@ -1,9 +1,10 @@
 @import "~src/assets/scss/mixins/mixins";
 
 :host {
-  @include flexbox();
+  display: block;
 
   height: 100%;
+  overflow-y: auto;
   padding: { top: 32px; bottom: 32px; };
 
   background: #ffffff;

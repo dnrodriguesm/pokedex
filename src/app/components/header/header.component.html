@@ -6,26 +6,26 @@
   <div class="header__form">
     <h1 class="header__title">Pokémon Database (Pokedex)</h1>
   
-    <mat-form-field class="mat-form-field--block">
-      <mat-select placeholder="Select a Pokémon">
-        <mat-optgroup label="Grupo">
-          <mat-option [value]="0">
-            Pikachu
+    <div class="header__controls">
+      <mat-form-field class="mat-form-field--block">
+        <mat-select
+          #select
+          placeholder="Select a Pokémon"
+          (selectionChange)="onChange($event)">
+          <mat-option
+            *ngFor="let pokemon of pokemons"
+            [value]="pokemon.url">
+            {{ pokemon.name }}
           </mat-option>
-          <mat-option [value]="1">
-            Charizard
-          </mat-option>
-        </mat-optgroup>
-
-        <mat-optgroup label="Grupo 2">
-          <mat-option [value]="0">
-            Pikachu
-          </mat-option>
-          <mat-option [value]="1">
-            Charizard
-          </mat-option>
-        </mat-optgroup>
-      </mat-select>
-    </mat-form-field>
+        </mat-select>
+      </mat-form-field>
+  
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="clearChange(select)"
+        [disabled]="!select.value"
+        class="mat-button--max-height">Limpar</button>
+    </div>
   </div>
 </header>

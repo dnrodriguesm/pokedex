@@ -1,4 +1,7 @@
-export interface PokeCommon {
+interface PokeCache {
+  cache?: Poke;
+}
+export interface PokeCommon extends PokeCache {
   name: string;
   url: string;
 }

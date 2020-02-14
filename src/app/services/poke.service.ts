@@ -18,11 +18,47 @@ export class PokeService {
     private _http: HttpClient,
     private _storage: StorageService) {}
 
-  public getPoke(poke: string = 'pikachu'): Observable<Poke> {
+  private _hasPokesInCache(): boolean {
+    const item: string = this._storage.getItem(this.keyOfStorage);
+    return !!item;
+  }
+
+  private _hasPokeInCache(id: string): Poke {
+    if (this._hasPokesInCache()) {
+      const pokemons: PokeCommon[] = JSON.parse(this._storage.getItem(this.keyOfStorage));
+      return pokemons[parseInt(id, 10) - 1].cache || null;
+    }
+
+    return null;
+  }
+
+  private _setPokeInCache(poke: Poke): void {
+    if (this._hasPokesInCache()) {
+      const pokemons: PokeCommon[] = JSON.parse(this._storage.getItem(this.keyOfStorage));
+      const index: number = pokemons.findIndex(item => item.name === poke.name);
+      this._updateCache(pokemons, poke, index);
+    }
+  }
+
+  private _updateCache(pokemons: PokeCommon[], poke: Poke, index: number): void {
+    pokemons[index].cache = poke;
+    this._storage.setItem(this.keyOfStorage, JSON.stringify(pokemons));
+  }
+
+  public getPoke(id: string = 'pikachu'): Observable<Poke> {
     return new Observable(observer => {
-      this._http.get(`${environment.pokeApi}/${poke}`)
+      if (this._hasPokeInCache(id)) {
+        observer.next(this._hasPokeInCache(id));
+        observer.complete();
+        return;
+      }
+
+      this._http.get(`${environment.pokeApi}/${id}`)
         .subscribe(
-          pokemon => observer.next(pokemon as Poke),
+          (pokemon: Poke) => {
+            this._setPokeInCache(pokemon);
+            observer.next(pokemon);
+          },
           err => observer.error(err),
           () => observer.complete
         );
@@ -31,11 +67,8 @@ export class PokeService {
 
   public getAll(): Observable<PokeCommon[]> {
     return new Observable(observer => {
-      const item: string = this._storage.getItem(this.keyOfStorage);
-      const hasCache: boolean = !!item;
-
-      if (hasCache) {
-        observer.next(JSON.parse(item));
+      if (this._hasPokesInCache()) {
+        observer.next(JSON.parse(this._storage.getItem(this.keyOfStorage)));
         observer.complete();
         return;
       }
@@ -52,5 +85,9 @@ export class PokeService {
           () => observer.complete()
         );
     });
+  }
+
+  public getPokeId(url: string): string {
+    return url.replace(environment.pokeApi, '').replace('/', '');
   }
 }

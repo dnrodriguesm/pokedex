@@ -9,7 +9,13 @@ import { HeaderComponent } from '@components/header/header.component';
 import { FooterComponent } from '@components/footer/footer.component';
 import { PokedexComponent } from '@components/pokedex/pokedex.component';
 
-import { MatSelectModule } from '@angular/material';
+import {
+  MatSelectModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatListModule,
+  MatProgressBarModule,
+  MatButtonModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -22,7 +28,11 @@ import { MatSelectModule } from '@angular/material';
     CommonModule,
     HomeRoutingModule,
     MatSelectModule,
-
+    MatExpansionModule,
+    MatIconModule,
+    MatListModule,
+    MatProgressBarModule,
+    MatButtonModule
   ],
   exports: [RouterModule]
 })

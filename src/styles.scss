@@ -19,6 +19,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: { top: 0; bottom: 8px };
 }
 
+ul {
+  padding: 0 20px 0;
+  margin: 0;
+}
+
 .container {
   @extend %container;
   @extend %padding--x;
@@ -37,4 +42,23 @@ h1, h2, h3, h4, h5, h6 {
  */
 .mat-form-field--block {
   width: 100%;
+}
+
+.mat-button--max-height {
+  max-height: 46px;
+}
+
+.mat-list-item--stats .mat-list-item-content {
+  span {
+    &:first-of-type {
+      width: 200px;
+      margin-right: 32px;
+    }
+    
+    &:last-of-type {
+      width: 70px;
+      margin-left: 32px;
+      text-align: right;
+    }
+  }
 }

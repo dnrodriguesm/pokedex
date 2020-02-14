@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { Poke } from '@models/poke.model';
 
 @Component({
   selector: 'pkd-pokedex',
@@ -6,4 +8,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./pokedex.component.scss']
 })
 
-export class PokedexComponent {}
+export class PokedexComponent {
+  @Input() pokemon: Poke;
+}
