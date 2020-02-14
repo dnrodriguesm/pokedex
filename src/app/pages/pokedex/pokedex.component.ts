@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 @Component({
   selector: 'pkd-pokedex',
   templateUrl: './pokedex.component.html',
