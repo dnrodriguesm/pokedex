@@ -21,6 +21,5 @@ export class HomeComponent {
 
   public selectPokemon(poke: Poke): void {
     this.pokemon = poke;
-    console.log(poke);
   }
 }

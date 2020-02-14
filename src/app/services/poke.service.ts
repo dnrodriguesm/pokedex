@@ -10,6 +10,8 @@ import { StorageService } from '@services/storage.service';
 @Injectable({ providedIn: 'root' })
 
 export class PokeService {
+  public pokemons: PokeCommon[] = [];
+
   public get keyOfStorage(): string {
     return 'pokemons';
   }
@@ -25,8 +27,7 @@ export class PokeService {
 
   private _hasPokeInCache(id: string): Poke {
     if (this._hasPokesInCache()) {
-      const pokemons: PokeCommon[] = JSON.parse(this._storage.getItem(this.keyOfStorage));
-      return pokemons[parseInt(id, 10) - 1].cache || null;
+      return this.pokemons[parseInt(id, 10) - 1].cache || null;
     }
 
     return null;
@@ -34,15 +35,13 @@ export class PokeService {
 
   private _setPokeInCache(poke: Poke): void {
     if (this._hasPokesInCache()) {
-      const pokemons: PokeCommon[] = JSON.parse(this._storage.getItem(this.keyOfStorage));
-      const index: number = pokemons.findIndex(item => item.name === poke.name);
-      this._updateCache(pokemons, poke, index);
+      const index: number = this.pokemons.findIndex(item => item.name === poke.name);
+      this._updateCache(poke, index);
     }
   }
 
-  private _updateCache(pokemons: PokeCommon[], poke: Poke, index: number): void {
-    pokemons[index].cache = poke;
-    this._storage.setItem(this.keyOfStorage, JSON.stringify(pokemons));
+  private _updateCache(poke: Poke, index: number): void {
+    this.pokemons[index].cache = poke;
   }
 
   public getPoke(id: string = 'pikachu'): Observable<Poke> {
@@ -68,7 +67,8 @@ export class PokeService {
   public getAll(): Observable<PokeCommon[]> {
     return new Observable(observer => {
       if (this._hasPokesInCache()) {
-        observer.next(JSON.parse(this._storage.getItem(this.keyOfStorage)));
+        this.pokemons = JSON.parse(this._storage.getItem(this.keyOfStorage));
+        observer.next(this.pokemons);
         observer.complete();
         return;
       }
@@ -79,6 +79,7 @@ export class PokeService {
             const { results } = response;
 
             this._storage.setItem(this.keyOfStorage, JSON.stringify(results));
+            this.pokemons = results;
             observer.next(results as PokeCommon[]);
           },
           err => observer.error(err),
