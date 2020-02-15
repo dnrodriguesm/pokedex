@@ -17,7 +17,9 @@ import {
   MatIconModule,
   MatListModule,
   MatProgressBarModule,
-  MatButtonModule } from '@angular/material';
+  MatButtonModule,
+  MatGridTile,
+  MatGridList } from '@angular/material';
 
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
@@ -26,7 +28,9 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     HeaderComponent,
     FooterComponent,
     PokedexComponent,
-    HomeComponent
+    HomeComponent,
+    MatGridTile,
+    MatGridList
   ],
   imports: [
     CommonModule,

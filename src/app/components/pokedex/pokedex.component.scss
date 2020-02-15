@@ -1,15 +1,18 @@
 @import '~src/assets/scss/mixins/mixins';
 @import '~src/assets/scss/placeholders/placeholders';
 
-.pokedex {
-  @include flexbox();
-  @include flex-direction(column);
-
+%content {
   background: #ffffff;
   @extend %container;
   @extend %padding;
   @extend %radius;
   margin-bottom: 16px;
+}
+
+.pokedex {
+  @include flexbox();
+  @include flex-direction(column);
+  @extend %content;
 
   &__status {
     @include flexbox();
@@ -28,6 +31,29 @@
   &__thumb {
     max-width: 92px;
     border: solid 1px #eaeaea;
+  }
+}
+
+.popular {
+  @extend %content;
+
+  > h2 {
+    @include font-size(20px);
+    margin-bottom: 0;
+  }
+
+  img {
+    display: block;
+
+    width: 85%;
+    padding: 10px;
+    margin: 0 auto;
+    border: solid 1px #eaeaea;
+
+    &.--default {
+      filter: grayscale(1);
+      opacity: .4;
+    }
   }
 }
 

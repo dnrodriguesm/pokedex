@@ -77,7 +77,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   public clearChange(select: MatSelect): void {
-    select.writeValue(null);
+    select.value = null;
     this.pokeSearch.setValue(null);
     this.changedPokemon.emit(null);
   }

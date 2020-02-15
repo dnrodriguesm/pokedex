@@ -1,6 +1,11 @@
 interface PokeCache {
   cache?: Poke;
 }
+
+interface PokePopular {
+  times?: number;
+}
+
 export interface PokeCommon extends PokeCache {
   name: string;
   url: string;
@@ -55,7 +60,7 @@ interface PokeStat {
   stat: PokeCommon;
 }
 
-export interface Poke {
+export interface Poke extends PokePopular {
   abilities: Array<PokeAbility>;
   base_experience: number;
   forms: Array<PokeCommon>;
