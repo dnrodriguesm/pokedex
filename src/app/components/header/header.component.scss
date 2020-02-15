@@ -1,0 +1,52 @@
+@import "~src/assets/scss/mixins/mixins";
+@import '~src/assets/scss/placeholders/placeholders';
+
+$header-logo--min-size: 55px;
+$header-info--size: 150px;
+$header-form--background: #ffffff;
+
+:host {
+  width: 100%;
+}
+
+.header {
+  @include flexbox();
+  @include flex-direction(column);
+  margin-bottom: 16px;
+
+  &__form {
+    background-color: $header-form--background;
+    padding: 24px 24px 8px;
+    @extend %radius;
+  }
+
+  &__controls {
+    @include flexbox();
+
+    > button {
+      margin-left: 24px;
+    }
+  }
+
+  &__logo {
+    display: block;
+    max-width: $header-logo--min-size;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    @include font-size(20px);
+    margin-bottom: 16px;
+  }
+}
+
+@media(min-width: 768px) {
+  .header {
+    @include flex-direction(row-reverse);
+
+    &__form { @include flex(1); margin-right: 24px; }
+    &__info { @include flex-basis($header-info--size); }
+    &__logo { max-width: 100%; margin-bottom: 0; }
+    &__title { @include font-size(32px); }
+  }
+}

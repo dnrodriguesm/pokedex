@@ -1,0 +1,104 @@
+<section *ngIf="pokemon" class="pokedex">
+  <div class="pokedex__status">
+    <img
+      class="pokedex__thumb"
+      [src]="pokemon.sprites.front_default"
+      [alt]="pokemon.name">
+
+    <div>
+      <div><span>Peso: {{ pokemon.weight }}</span></div>
+      <div><span>Altura: {{ pokemon.height }}</span></div>
+      <div>
+        <span>Tipos: 
+          <ul>
+            <li *ngFor="let item of pokemon.types">{{ item.type.name }}</li>
+          </ul>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pokedex__detail">
+    <mat-accordion>
+      <mat-expansion-panel [expanded]="step === 0" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Moves</mat-panel-title>
+        </mat-expansion-panel-header>
+  
+        <mat-list *ngIf="pokemon.moves">
+          <mat-list-item *ngIf="pokemon.moves.length === 0">
+            Moves is empty
+          </mat-list-item>
+  
+          <mat-list-item *ngFor="let item of pokemon.moves">
+            {{ item.move.name }}
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    
+      <mat-expansion-panel [expanded]="step === 1" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Abilities</mat-panel-title>
+        </mat-expansion-panel-header>
+  
+        <mat-list *ngIf="pokemon.abilities">
+          <mat-list-item *ngIf="pokemon.abilities.length === 0">
+            Abilities is empty
+          </mat-list-item>
+  
+          <mat-list-item *ngFor="let item of pokemon.abilities">
+            {{ item.ability.name }}
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    
+      <mat-expansion-panel [expanded]="step === 2" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Stats</mat-panel-title>
+        </mat-expansion-panel-header>
+  
+        <mat-list *ngIf="pokemon.stats">
+          <mat-list-item *ngIf="pokemon.stats.length === 0">
+            Stats is empty
+          </mat-list-item>
+  
+          <mat-list-item class="mat-list-item--stats" *ngFor="let item of pokemon.stats">
+            <span>{{ item.stat.name }}</span>
+            <mat-progress-bar mode="determinate" [value]="item.base_stat"></mat-progress-bar>
+            <span>{{ item.base_stat }}%</span>
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+  
+      <mat-expansion-panel [expanded]="step === 3" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Held Items</mat-panel-title>
+        </mat-expansion-panel-header>
+  
+        <mat-list *ngIf="pokemon.held_items">
+          <mat-list-item *ngIf="pokemon.held_items.length === 0">
+            Held Items is empty
+          </mat-list-item>
+  
+          <mat-list-item *ngFor="let held_item of pokemon.held_items">
+            {{ held_item.item.name }}
+          </mat-list-item>
+        </mat-list>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</section>
+
+<section class="popular" *ngIf="!pokemon">
+  <h2>Most popular</h2>
+
+  <mat-grid-list cols="6" rowHeight="6:1">
+    <mat-grid-tile rowspan="7" *ngFor="let item of popular | slice:0:6;">
+      <div (click)="goToItem(item)"><img [src]="item.thumb" [alt]="item.name"></div>
+    </mat-grid-tile>
+    
+    <mat-grid-tile rowspan="7" *ngFor="let default of [].constructor((popular.length >= 6) ? 0 : 6 - popular.length)">
+      <div><img class="--default" src="./assets/images/pokeball.svg" alt="empty"></div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</section>

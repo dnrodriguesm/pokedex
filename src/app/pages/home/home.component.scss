@@ -1,0 +1,11 @@
+@import "~src/assets/scss/mixins/mixins";
+
+:host,
+.home {
+  width: 100%;
+}
+
+.home {
+  @include flexbox();
+  @include justify-content(center);
+}

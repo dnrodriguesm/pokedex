@@ -1,0 +1,10 @@
+@import '~src/assets/scss/placeholders/placeholders';
+
+.footer {
+  background: #ffffff;
+  @extend %container;
+  @extend %padding;
+  @extend %radius;
+
+  text-align: right;
+}

@@ -1,0 +1,74 @@
+@import '~src/assets/scss/mixins/mixins';
+@import '~src/assets/scss/placeholders/placeholders';
+
+%content {
+  background: #ffffff;
+  @extend %container;
+  @extend %padding;
+  @extend %radius;
+  margin-bottom: 16px;
+}
+
+.pokedex {
+  @include flexbox();
+  @include flex-direction(column);
+  @extend %content;
+
+  &__status {
+    @include flexbox();
+    @include flex-basis(96px);
+    min-width: 100%;
+    margin-bottom: 16px;
+
+    span { @include font-size(14px); }
+    > div { margin-left: 16px; }
+  }
+
+  &__detail {
+    @include flex(1);
+  }
+
+  &__thumb {
+    max-width: 92px;
+    border: solid 1px #eaeaea;
+  }
+}
+
+.popular {
+  @extend %content;
+
+  > h2 {
+    @include font-size(20px);
+    margin-bottom: 0;
+  }
+
+  img {
+    display: block;
+
+    width: 125px;
+    padding: 10px;
+    margin: 0 auto;
+    border: solid 1px #eaeaea;
+
+    &.--default {
+      filter: grayscale(1);
+      opacity: .4;
+    }
+  }
+}
+
+@media(min-width: 768px) {
+  .pokedex {
+    @include flex-direction(row);
+
+    &__status {
+      display: block;
+      min-width: initial;
+      margin-bottom: 0;
+
+      > div { margin-left: 0; }
+    }
+
+    &__detail { margin-left: 32px; }
+  }
+}

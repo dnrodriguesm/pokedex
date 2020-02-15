@@ -1,0 +1,17 @@
+<section class="home">
+  <div class="container fadeIn">
+    <pkd-header
+      (changedPokemon)="selectPokemon($event)">
+    </pkd-header>
+
+    <pkd-pokedex
+      class="pkd-pokedex"
+      [pokemon]="pokemon"
+      (changedPokemon)="changePokemon($event)">
+    </pkd-pokedex>
+
+    <pkd-footer
+      class="pkd-footer">
+    </pkd-footer>
+  </div>
+</section>

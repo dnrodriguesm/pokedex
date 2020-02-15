@@ -1,1 +1,125 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~src/assets/scss/mixins/mixins";
+@import '~src/assets/scss/placeholders/placeholders';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: { top: 0; bottom: 8px };
+}
+
+ul {
+  padding: 0 20px 0;
+  margin: 0;
+}
+
+.container {
+  @extend %container;
+  @extend %padding--x;
+}
+
+@media(min-width: 768px) {
+  .container {
+    width: 960px;
+    max-width: 100%;
+  }
+}
+
+
+/**
+ * Animations
+ */
+.fadeIn {
+  @include animation(fadeIn .2s ease-in-out);
+}
+
+.shake {
+  @include animation(shake .8s ease-in-out);
+}
+
+@include keyframes(fadeIn) {
+  from { opacity: 0; } 
+  to  { opacity: 1; } 
+}
+
+@include keyframes(shake) {
+  from,
+  11.1%,
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  22.2% {
+    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);
+    transform: skewX(-12.5deg) skewY(-12.5deg);
+  }
+
+  33.3% {
+    -webkit-transform: skewX(6.25deg) skewY(6.25deg);
+    transform: skewX(6.25deg) skewY(6.25deg);
+  }
+
+  44.4% {
+    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);
+    transform: skewX(-3.125deg) skewY(-3.125deg);
+  }
+
+  55.5% {
+    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);
+    transform: skewX(1.5625deg) skewY(1.5625deg);
+  }
+
+  66.6% {
+    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);
+    transform: skewX(-0.78125deg) skewY(-0.78125deg);
+  }
+
+  77.7% {
+    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);
+    transform: skewX(0.390625deg) skewY(0.390625deg);
+  }
+
+  88.8% {
+    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+  }
+}
+
+
+/**
+ * Angular Material overrides
+ */
+.mat-form-field--block {
+  width: 100%;
+}
+
+.mat-button--max-height {
+  max-height: 46px;
+}
+
+.mat-list-item--stats .mat-list-item-content {
+  span {
+    &:first-of-type {
+      width: 200px;
+      margin-right: 32px;
+    }
+    
+    &:last-of-type {
+      width: 70px;
+      margin-left: 32px;
+      text-align: right;
+    }
+  }
+}
