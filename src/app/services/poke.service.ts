@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '@env/environment';
+
+import { StorageService } from '@services/storage.service';
 
 import { Poke, PokeCommon } from '@models/poke.model';
 
-import { StorageService } from '@services/storage.service';
+import { environment } from '@env/environment';
 
 @Injectable({ providedIn: 'root' })
 

@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { Poke, PokeCommon } from '@models/poke.model';
-import { MatSelect } from '@angular/material';
 import { environment } from '@env/environment';
 
 import { HeaderComponent } from '@components/header/header.component';
