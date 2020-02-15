@@ -43,6 +43,10 @@ export class PokeService {
 
   private _updateCache(poke: Poke, index: number): void {
     this.pokemons[index].cache = poke;
+    const { front_default } = this.pokemons[index].cache.sprites;
+
+    this.pokemons[index].cache.sprites.front_default = (!front_default) ?
+      './assets/images/pokemon.png' : front_default;
   }
 
   public getPoke(id: string = 'pikachu'): Observable<Poke> {
