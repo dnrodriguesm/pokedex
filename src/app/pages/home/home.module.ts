@@ -20,9 +20,7 @@ import { MaterialModule } from '@shared/material/material.module';
     HeaderComponent,
     FooterComponent,
     PokedexComponent,
-    HomeComponent,
-    MatGridTile,
-    MatGridList
+    HomeComponent
   ],
   imports: [
     CommonModule,

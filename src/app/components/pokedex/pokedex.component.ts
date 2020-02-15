@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Poke, PokeCommon, PokeCounter } from '@models/poke.model';
 import { StorageService } from '@services/storage.service';
@@ -14,8 +14,6 @@ export class PokedexComponent {
 
   public popular: PokeCounter[];
 
-  @Input() pokemons: PokeCommon[];
-
   @Input()
   public set pokemon(poke: Poke) {
     this._pokemon = poke;
@@ -26,19 +24,34 @@ export class PokedexComponent {
     return this._pokemon;
   }
 
+  @Output() changedPokemon: EventEmitter<PokeCommon> = new EventEmitter<PokeCommon>();
+
   constructor(private _storageService: StorageService) {
     const items = this._storageService.getItem('popular-pokes');
     this.popular = items ? JSON.parse(items) : [];
   }
 
+  public goToItem(poke: PokeCounter): void {
+    const { name, url } = poke;
+    this.changedPokemon.emit({ name, url });
+  }
+
   private _addToPopular(poke: Poke) {
     if (!poke) { return; }
+
+    const { name, id, sprites } = poke;
+    const { front_default: thumb } = sprites;
 
     if (this.popular.find(pokemon => pokemon.name === poke.name)) {
       const index = this.popular.findIndex(pokemon => pokemon.name === poke.name);
       this.popular[index].times++;
     } else {
-      this.popular.push({ name: poke.name, thumb: poke.sprites.front_default, times: 1 });
+      this.popular.push({
+        name,
+        thumb,
+        times: 1,
+        url: id.toString()
+      });
     }
 
     this.popular = this.popular.sort((a, b) => {

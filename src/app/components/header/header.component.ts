@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
 
 import { Poke } from '@models/poke.model';
 import { SearchComponent } from '@components/search/search.component';
@@ -10,6 +10,8 @@ import { SearchComponent } from '@components/search/search.component';
 })
 
 export class HeaderComponent {
+  @ViewChild('search') search: SearchComponent;
+
   @Output() changedPokemon: EventEmitter<Poke> = new EventEmitter<Poke>();
 
   public clearChange(search: SearchComponent): void {

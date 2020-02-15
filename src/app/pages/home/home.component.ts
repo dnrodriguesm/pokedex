@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
-import { Poke } from '@models/poke.model';
+import { Poke, PokeCommon } from '@models/poke.model';
+import { MatSelect } from '@angular/material';
+import { environment } from '@env/environment';
+
+import { HeaderComponent } from '@components/header/header.component';
 
 @Component({
   selector: 'pkd-home',
@@ -10,6 +14,8 @@ import { Poke } from '@models/poke.model';
 
 export class HomeComponent {
   private _pokemon: Poke;
+
+  @ViewChild(HeaderComponent) header: HeaderComponent;
 
   public set pokemon(poke: Poke) {
     this._pokemon = poke;
@@ -21,5 +27,11 @@ export class HomeComponent {
 
   public selectPokemon(poke: Poke): void {
     this.pokemon = poke;
+  }
+
+  public changePokemon(value: PokeCommon) {
+    const { select } = this.header.search;
+    select.value = `${environment.pokeApi}/${value.url}/`;
+    select.selectionChange.emit({ source: select, value: select.value });
   }
 }

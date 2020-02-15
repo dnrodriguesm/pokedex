@@ -14,6 +14,7 @@ export interface PokeCommon extends PokeCache {
 export interface PokeCounter {
   name: string;
   thumb: string;
+  url: string;
   times: number;
 }
 

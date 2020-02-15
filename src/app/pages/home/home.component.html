@@ -6,8 +6,8 @@
 
     <pkd-pokedex
       class="pkd-pokedex"
-      [pokemons]="pokemons"
-      [pokemon]="pokemon">
+      [pokemon]="pokemon"
+      (changedPokemon)="changePokemon($event)">
     </pkd-pokedex>
 
     <pkd-footer

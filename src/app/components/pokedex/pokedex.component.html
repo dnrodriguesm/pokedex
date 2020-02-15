@@ -94,7 +94,7 @@
 
   <mat-grid-list cols="6" rowHeight="6:1">
     <mat-grid-tile rowspan="7" *ngFor="let item of popular | slice:0:6;">
-      <div><img [src]="item.thumb" [alt]="item.name"></div>
+      <div (click)="goToItem(item)"><img [src]="item.thumb" [alt]="item.name"></div>
     </mat-grid-tile>
     
     <mat-grid-tile rowspan="7" *ngFor="let default of [].constructor((popular.length >= 6) ? 0 : 6 - popular.length)">

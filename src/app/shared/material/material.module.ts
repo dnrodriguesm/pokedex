@@ -7,7 +7,8 @@ import {
   MatIconModule,
   MatListModule,
   MatProgressBarModule,
-  MatButtonModule } from '@angular/material';
+  MatButtonModule,
+  MatGridListModule } from '@angular/material';
 
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
@@ -19,6 +20,7 @@ const MODULES = [
   MatListModule,
   MatProgressBarModule,
   MatButtonModule,
+  MatGridListModule,
   NgxMatSelectSearchModule
 ];
 
