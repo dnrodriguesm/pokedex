@@ -11,6 +11,12 @@ export interface PokeCommon extends PokeCache {
   url: string;
 }
 
+export interface PokeCounter {
+  name: string;
+  thumb: string;
+  times: number;
+}
+
 interface PokeAbility {
   ability: PokeCommon;
   is_hidden: boolean;

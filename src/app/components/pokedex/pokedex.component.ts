@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-import { Poke, PokeCommon } from '@models/poke.model';
+import { Poke, PokeCommon, PokeCounter } from '@models/poke.model';
+import { StorageService } from '@services/storage.service';
 
 @Component({
   selector: 'pkd-pokedex',
@@ -11,7 +12,7 @@ import { Poke, PokeCommon } from '@models/poke.model';
 export class PokedexComponent {
   private _pokemon: Poke;
 
-  public popular: Poke[] = [];
+  public popular: PokeCounter[];
 
   @Input() pokemons: PokeCommon[];
 
@@ -25,6 +26,11 @@ export class PokedexComponent {
     return this._pokemon;
   }
 
+  constructor(private _storageService: StorageService) {
+    const items = this._storageService.getItem('popular-pokes');
+    this.popular = items ? JSON.parse(items) : [];
+  }
+
   private _addToPopular(poke: Poke) {
     if (!poke) { return; }
 
@@ -32,7 +38,7 @@ export class PokedexComponent {
       const index = this.popular.findIndex(pokemon => pokemon.name === poke.name);
       this.popular[index].times++;
     } else {
-      this.popular.push({ ...poke, times: 1 });
+      this.popular.push({ name: poke.name, thumb: poke.sprites.front_default, times: 1 });
     }
 
     this.popular = this.popular.sort((a, b) => {
@@ -41,5 +47,7 @@ export class PokedexComponent {
 
       return 0;
     }).slice(0).reverse();
+
+    this._storageService.setItem('popular-pokes', JSON.stringify(this.popular));
   }
 }
