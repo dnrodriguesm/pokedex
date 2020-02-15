@@ -27,7 +27,8 @@ export class PokeService {
 
   private _hasPokeInCache(id: string): Poke {
     if (this._hasPokesInCache()) {
-      return this.pokemons[parseInt(id, 10) - 1].cache || null;
+      const item = this.pokemons.find(poke => poke.url === `${environment.pokeApi}/${id}/`);
+      return item.cache || null;
     }
 
     return null;
@@ -89,6 +90,6 @@ export class PokeService {
   }
 
   public getPokeId(url: string): string {
-    return url.replace(environment.pokeApi, '').replace('/', '');
+    return url.replace(environment.pokeApi, '').replace(new RegExp('/', 'g'), '');
   }
 }
