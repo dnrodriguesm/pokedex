@@ -7,34 +7,19 @@
     <h1 class="header__title">Pokémon Database (Pokedex)</h1>
   
     <div class="header__controls">
-      <mat-form-field class="mat-form-field--block">
-        <mat-select
-          #select
-          placeholder="Select a Pokémon"
-          [formControl]="pokeSearch"
-          (selectionChange)="onChange($event)">
-          <mat-option>
-            <ngx-mat-select-search
-              [formControl]="search"
-              placeholderLabel="Buscar por..."
-              noEntriesFoundLabel="Nenhum resultado foi encontrado">
-            </ngx-mat-select-search>
-          </mat-option>
-
-          <mat-option
-            *ngFor="let pokemon of filteredPokes | async"
-            [value]="pokemon.url">
-            {{ pokemon.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <pkd-search
+        #search
+        (changedPokemon)="emitPokemon($event)">
+      </pkd-search>
   
       <button
         mat-flat-button
         color="primary"
-        (click)="clearChange(select)"
-        [disabled]="!select.value"
-        class="mat-button--max-height">Limpar</button>
+        (click)="clearChange(search)"
+        [disabled]="!search.select.value"
+        class="mat-button--max-height">
+        Limpar
+      </button>
     </div>
   </div>
 </header>

@@ -6,22 +6,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home.routing.module';
 
+import { SearchModule } from '@components/search/search.module';
 import { HeaderComponent } from '@components/header/header.component';
 import { FooterComponent } from '@components/footer/footer.component';
 import { PokedexComponent } from '@components/pokedex/pokedex.component';
 
-import {
-  MatSelectModule,
-  MatFormFieldModule,
-  MatExpansionModule,
-  MatIconModule,
-  MatListModule,
-  MatProgressBarModule,
-  MatButtonModule,
-  MatGridTile,
-  MatGridList } from '@angular/material';
+import { MatGridTile, MatGridList } from '@angular/material';
 
-import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { MaterialModule } from '@shared/material/material.module';
 
 @NgModule({
   declarations: [
@@ -36,14 +28,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     CommonModule,
     ReactiveFormsModule,
     HomeRoutingModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatListModule,
-    MatProgressBarModule,
-    MatButtonModule,
-    NgxMatSelectSearchModule
+    SearchModule,
+    MaterialModule
   ],
   exports: [RouterModule]
 })

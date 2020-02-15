@@ -1,0 +1,21 @@
+<mat-form-field class="mat-form-field--block">
+  <mat-select
+    #select
+    placeholder="Select a Pokémon"
+    [formControl]="pokeSearch"
+    (selectionChange)="onChange($event)">
+    <mat-option>
+      <ngx-mat-select-search
+        [formControl]="search"
+        placeholderLabel="Buscar por..."
+        noEntriesFoundLabel="Nenhum resultado foi encontrado">
+      </ngx-mat-select-search>
+    </mat-option>
+
+    <mat-option
+      *ngFor="let pokemon of filteredPokes | async"
+      [value]="pokemon.url">
+      {{ pokemon.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
