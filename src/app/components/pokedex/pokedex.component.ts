@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, Input, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { Poke, PokeCommon, PokeCounter } from '@models/poke.model';
+import { Poke, PokeCounter } from '@models/poke.model';
 import { StorageService } from '@services/storage.service';
 
 @Component({
@@ -25,22 +26,21 @@ export class PokedexComponent {
     return this._pokemon;
   }
 
-  @Output() changedPokemon: EventEmitter<PokeCommon> = new EventEmitter<PokeCommon>();
-
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.breakpoint = (event.target.innerWidth <= 767) ? 2 : 5;
   }
 
-  constructor(private _storageService: StorageService) {
+  constructor(
+    private _router: Router,
+    private _storageService: StorageService) {
     const items = this._storageService.getItem('popular-pokes');
     this.popular = items ? JSON.parse(items) : [];
     this.breakpoint = 5;
   }
 
   public goToItem(poke: PokeCounter): void {
-    const { name, url } = poke;
-    this.changedPokemon.emit({ name, url });
+    this._router.navigate(['pokedex', poke.name]);
   }
 
   private _addToPopular(poke: Poke) {

@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Poke } from '@models/poke.model';
 import { SearchComponent } from '@components/search/search.component';
@@ -14,7 +15,11 @@ export class HeaderComponent {
 
   @Output() changedPokemon: EventEmitter<Poke> = new EventEmitter<Poke>();
 
+  constructor(private _router: Router) {}
+
   public clearChange(search: SearchComponent): void {
+    this._router.navigate(['pokedex']);
+
     search.select.value = null;
     search.pokeSearch.setValue(null);
     this.emitPokemon();
