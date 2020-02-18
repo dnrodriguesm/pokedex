@@ -123,3 +123,32 @@ ul {
     }
   }
 }
+
+.mat-expansion-panel-header {
+  background-color: #1ACBEB;
+}
+
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+  color: #ffffff;
+}
+
+
+.mat-expansion-panel {
+  &:not(.mat-expanded) {
+    .mat-expansion-panel-header:not([aria-disabled=true]):hover {
+      background-color: #1ACBEB;
+    }
+  }
+  
+  .mat-expansion-panel-header.mat-expanded {
+    &:focus,
+    &:hover {
+      background-color: #1ACBEB; 
+    }
+  }
+
+  .mat-expansion-panel-body {
+    padding: 24px 16px;
+  }
+}

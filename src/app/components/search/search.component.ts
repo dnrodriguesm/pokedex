@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   protected _onDestroy = new Subject<void>();
 
-  @ViewChild('select') select: MatSelect;
+  @ViewChild('select', { static: true }) select: MatSelect;
 
   @Output() changedPokemon: EventEmitter<Poke> = new EventEmitter<Poke>();
 

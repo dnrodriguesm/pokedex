@@ -14,7 +14,7 @@ import { HeaderComponent } from '@components/header/header.component';
 export class HomeComponent {
   private _pokemon: Poke;
 
-  @ViewChild(HeaderComponent) header: HeaderComponent;
+  @ViewChild(HeaderComponent, { static: true }) header: HeaderComponent;
 
   public set pokemon(poke: Poke) {
     this._pokemon = poke;
