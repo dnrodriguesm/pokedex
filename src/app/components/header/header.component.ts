@@ -10,7 +10,7 @@ import { SearchComponent } from '@components/search/search.component';
 })
 
 export class HeaderComponent {
-  @ViewChild('search') search: SearchComponent;
+  @ViewChild('search', { static: true }) search: SearchComponent;
 
   @Output() changedPokemon: EventEmitter<Poke> = new EventEmitter<Poke>();
 
