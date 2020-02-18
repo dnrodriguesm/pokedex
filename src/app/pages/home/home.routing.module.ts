@@ -13,6 +13,10 @@ const routes: Routes = [
   {
     path: 'pokedex',
     component: HomeComponent,
+    children: [{
+      path: ':id',
+      component: HomeComponent,
+    }]
   },
   {
     path: '**',

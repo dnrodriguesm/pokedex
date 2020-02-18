@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild } from '@angular/core';
 import { MatSelectChange, MatSelect } from '@angular/material';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { Subject, ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -25,7 +27,9 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   @Output() changedPokemon: EventEmitter<Poke> = new EventEmitter<Poke>();
 
-  constructor(private _pokeService: PokeService) {
+  constructor(
+    private _router: Router,
+    private _pokeService: PokeService) {
     this.search = new FormControl([null]);
     this.pokeSearch = new FormControl([[]]);
   }
@@ -69,10 +73,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   public onChange(event: MatSelectChange): void {
-    const id: string = this._pokeService.getPokeId(event.value);
-    this._pokeService.getPoke(id).subscribe(
-      pokemon => this.changedPokemon.emit(pokemon),
-      err => console.error(err)
-    );
+    this._router.navigate(['pokedex', event.value]);
   }
 }

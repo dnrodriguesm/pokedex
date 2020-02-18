@@ -1,7 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute, Params, Router, NavigationEnd, NavigationStart } from '@angular/router';
 
-import { Poke, PokeCommon } from '@models/poke.model';
-import { environment } from '@env/environment';
+import { Poke } from '@models/poke.model';
+import { PokeService } from '@services/poke.service';
 
 import { HeaderComponent } from '@components/header/header.component';
 
@@ -11,7 +12,7 @@ import { HeaderComponent } from '@components/header/header.component';
   styleUrls: ['./home.component.scss']
 })
 
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
   private _pokemon: Poke;
 
   @ViewChild(HeaderComponent, { static: true }) header: HeaderComponent;
@@ -24,13 +25,51 @@ export class HomeComponent {
     return this._pokemon;
   }
 
+  constructor(
+    private _router: Router,
+    private _cdr: ChangeDetectorRef,
+    private _pokeService: PokeService,
+    private _activatedRoute: ActivatedRoute) {}
+
+  ngAfterViewInit() {
+    const hasChildrenRoute: boolean = this._activatedRoute.snapshot.children.length > 0;
+
+    if (hasChildrenRoute) {
+      this._changePoke(this._activatedRoute.snapshot.children[0].params.id);
+    }
+
+    this._router.events.subscribe((navigation) => {
+      if (navigation instanceof NavigationEnd) {
+        const id = navigation.url.split('/')[2];
+        this._changePoke(id);
+      }
+    });
+
+    this._cdr.detectChanges();
+  }
+
   public selectPokemon(poke: Poke): void {
     this.pokemon = poke;
   }
 
-  public changePokemon(value: PokeCommon) {
-    const { select } = this.header.search;
-    select.value = `${environment.pokeApi}/${value.url}/`;
-    select.selectionChange.emit({ source: select, value: select.value });
+  private _changePoke(id: string): void {
+    if (!id) { return; }
+
+    const poke_id = this._pokeService.getPokeName(id);
+    this.header.search.pokeSearch.setValue(poke_id);
+
+    if (!poke_id) {
+      this._router.navigate(['pokedex']);
+      return;
+    }
+
+    this._pokeService.getPoke(poke_id).subscribe(
+      pokemon => {
+        const { select } = this.header.search;
+        select.value = poke_id;
+        this.selectPokemon(pokemon);
+      },
+      err => console.error(err)
+    );
   }
 }

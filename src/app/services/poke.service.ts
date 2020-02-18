@@ -28,8 +28,10 @@ export class PokeService {
 
   private _hasPokeInCache(id: string): Poke {
     if (this._hasPokesInCache()) {
-      const item = this.pokemons.find(poke => poke.url === `${environment.pokeApi}/${id}/`);
-      return item.cache || null;
+      const item = this.pokemons.find(poke =>
+        poke.url === `${environment.pokeApi}/${id}/` ||
+        poke.name === id);
+      return (item && item.cache) ? item.cache : null;
     }
 
     return null;
@@ -47,10 +49,10 @@ export class PokeService {
     const { front_default } = this.pokemons[index].cache.sprites;
 
     this.pokemons[index].cache.sprites.front_default = (!front_default) ?
-      './assets/images/pokemon.png' : front_default;
+      './assets/images/pokeball.svg' : front_default;
   }
 
-  public getPoke(id: string = 'pikachu'): Observable<Poke> {
+  public getPoke(id: string): Observable<Poke> {
     return new Observable(observer => {
       if (this._hasPokeInCache(id)) {
         observer.next(this._hasPokeInCache(id));
@@ -96,5 +98,13 @@ export class PokeService {
 
   public getPokeId(url: string): string {
     return url.replace(environment.pokeApi, '').replace(new RegExp('/', 'g'), '');
+  }
+
+  public getPokeName(id: string): string {
+    const pokemon = this.pokemons.find(poke =>
+      this.getPokeId(poke.url) === id ||
+      poke.name === id);
+
+    return (pokemon) ? pokemon.name : null;
   }
 }
