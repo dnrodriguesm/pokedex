@@ -8,7 +8,7 @@ export class StorageService {
   }
 
   public getItem(key: string): string {
-    return localStorage.getItem(key);
+    return localStorage.getItem(key)!;
   }
 
   public removeItem(key: string): void {

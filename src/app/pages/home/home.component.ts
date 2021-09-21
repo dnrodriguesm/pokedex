@@ -13,15 +13,15 @@ import { HeaderComponent } from '@components/header/header.component';
 })
 
 export class HomeComponent implements AfterViewInit {
-  private _pokemon: Poke;
+  private _pokemon!: Poke | null;
 
-  @ViewChild(HeaderComponent, { static: true }) header: HeaderComponent;
+  @ViewChild(HeaderComponent, { static: true }) header!: HeaderComponent;
 
-  public set pokemon(poke: Poke) {
+  public set pokemon(poke: Poke | null) {
     this._pokemon = poke;
   }
 
-  public get pokemon(): Poke {
+  public get pokemon(): Poke | null {
     return this._pokemon;
   }
 
@@ -48,7 +48,7 @@ export class HomeComponent implements AfterViewInit {
     this._cdr.detectChanges();
   }
 
-  public selectPokemon(poke: Poke): void {
+  public selectPokemon(poke: Poke | null): void {
     this.pokemon = poke;
   }
 

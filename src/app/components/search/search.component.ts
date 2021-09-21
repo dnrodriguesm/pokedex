@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild } from '@angular/core';
-import { MatSelectChange, MatSelect } from '@angular/material';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -12,18 +12,18 @@ import { PokeService } from '@services/poke.service';
 @Component({
   selector: 'pkd-search',
   templateUrl: './search.component.html',
-  styles: [':host { width: 100%; }']
+  styles: [':host { flex: 1 auto; }']
 })
 
 export class SearchComponent implements OnInit, OnDestroy {
-  public pokemons: PokeCommon[];
+  public pokemons!: PokeCommon[];
   public search: FormControl;
   public pokeSearch: FormControl;
   public filteredPokes: ReplaySubject<PokeCommon[]> = new ReplaySubject<PokeCommon[]>(1);
 
   protected _onDestroy = new Subject<void>();
 
-  @ViewChild('select', { static: true }) select: MatSelect;
+  @ViewChild('select', { static: true }) select!: MatSelect;
 
   @Output() changedPokemon: EventEmitter<Poke> = new EventEmitter<Poke>();
 

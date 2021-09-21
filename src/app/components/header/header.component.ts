@@ -11,9 +11,9 @@ import { SearchComponent } from '@components/search/search.component';
 })
 
 export class HeaderComponent {
-  @ViewChild('search', { static: true }) search: SearchComponent;
+  @ViewChild('search', { static: true }) search!: SearchComponent;
 
-  @Output() changedPokemon: EventEmitter<Poke> = new EventEmitter<Poke>();
+  @Output() changedPokemon: EventEmitter<Poke | null> = new EventEmitter<Poke | null>();
 
   constructor(private _router: Router) {}
 

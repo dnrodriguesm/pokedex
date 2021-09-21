@@ -26,7 +26,7 @@ export class PokeService {
     return !!item;
   }
 
-  private _hasPokeInCache(id: string): Poke {
+  private _hasPokeInCache(id: string): Poke | null {
     if (this._hasPokesInCache()) {
       const item = this.pokemons.find(poke =>
         poke.url === `${environment.pokeApi}/${id}/` ||
@@ -46,23 +46,23 @@ export class PokeService {
 
   private _updateCache(poke: Poke, index: number): void {
     this.pokemons[index].cache = poke;
-    const { front_default } = this.pokemons[index].cache.sprites;
+    const { front_default } = this.pokemons[index].cache!.sprites;
 
-    this.pokemons[index].cache.sprites.front_default = (!front_default) ?
+    this.pokemons[index].cache!.sprites.front_default = (!front_default) ?
       './assets/images/pokeball.svg' : front_default;
   }
 
   public getPoke(id: string): Observable<Poke> {
     return new Observable(observer => {
       if (this._hasPokeInCache(id)) {
-        observer.next(this._hasPokeInCache(id));
+        observer.next(this._hasPokeInCache(id)!);
         observer.complete();
         return;
       }
 
       this._http.get(`${environment.pokeApi}/${id}`)
         .subscribe(
-          (pokemon: Poke) => {
+          (pokemon: Poke | any) => {
             this._setPokeInCache(pokemon);
             observer.next(pokemon);
           },
@@ -100,7 +100,7 @@ export class PokeService {
     return url.replace(environment.pokeApi, '').replace(new RegExp('/', 'g'), '');
   }
 
-  public getPokeName(id: string): string {
+  public getPokeName(id: string): string | null {
     const pokemon = this.pokemons.find(poke =>
       this.getPokeId(poke.url) === id ||
       poke.name === id);

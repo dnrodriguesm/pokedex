@@ -11,18 +11,18 @@ import { StorageService } from '@services/storage.service';
 })
 
 export class PokedexComponent {
-  private _pokemon: Poke;
+  private _pokemon!: Poke | null;
 
   public popular: PokeCounter[];
   public breakpoint: number;
 
   @Input()
-  public set pokemon(poke: Poke) {
+  public set pokemon(poke: Poke | null) {
     this._pokemon = poke;
     this._addToPopular(poke);
   }
 
-  public get pokemon(): Poke {
+  public get pokemon(): Poke | null {
     return this._pokemon;
   }
 
@@ -43,7 +43,7 @@ export class PokedexComponent {
     this._router.navigate(['pokedex', poke.name]);
   }
 
-  private _addToPopular(poke: Poke) {
+  private _addToPopular(poke: Poke | null) {
     if (!poke) { return; }
 
     const { name, id, sprites } = poke;

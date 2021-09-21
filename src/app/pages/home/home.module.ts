@@ -11,8 +11,6 @@ import { HeaderComponent } from '@components/header/header.component';
 import { FooterComponent } from '@components/footer/footer.component';
 import { PokedexComponent } from '@components/pokedex/pokedex.component';
 
-import { MatGridTile, MatGridList } from '@angular/material';
-
 import { MaterialModule } from '@shared/material/material.module';
 
 @NgModule({

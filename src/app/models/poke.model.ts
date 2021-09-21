@@ -67,6 +67,19 @@ interface PokeStat {
   stat: PokeCommon;
 }
 
+interface PokeTypes {
+  slot: number;
+  type: PokeType;
+  name: string;
+  url: string;
+
+}
+
+interface PokeType {
+  name: string;
+  url: string;
+}
+
 export interface Poke extends PokePopular {
   abilities: Array<PokeAbility>;
   base_experience: number;
@@ -83,5 +96,6 @@ export interface Poke extends PokePopular {
   species: PokeCommon;
   sprites: PokeSprites;
   stats: Array<PokeStat>;
+  types: Array<PokeTypes>
   weight: number;
 }
